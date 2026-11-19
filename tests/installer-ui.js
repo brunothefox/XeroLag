@@ -1,0 +1,23 @@
+'use strict';
+const {app}=require('electron');
+const fs=require('node:fs/promises');
+const path=require('node:path');
+const assert=require('node:assert/strict');
+const {createInstallerWindow}=require('../installer/main');
+const {version}=require('../package.json');
+app.setPath('userData',path.resolve(__dirname,'../.cache/tests/setup-ui'));app.disableHardwareAcceleration();app.on('window-all-closed',()=>{});
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));const watchdog=setTimeout(()=>app.exit(1),40000);
+app.whenReady().then(async()=>{let window;try{
+  let state={phase:'ready',directory:'C:\\Program Files\\XeroLag',desktop:true,version,installedBytes:375000000,error:null};let opened=false,attempts=0,shortcut;
+  const publish=values=>{state={...state,...values};window.webContents.send('setup:state',state);};
+  const controller={state:()=>state,busy:()=>['verifying','installing'].includes(state.phase),initialize:async()=>{publish({});return state;},directory:async()=>{publish({directory:'F:\\Games\\XeroLag'});return state;},install:async desktop=>{shortcut=desktop;attempts++;if(attempts===1){publish({phase:'error',desktop,error:'Close XeroLag, then try installing again.'});return state;}publish({phase:'verifying',error:null,desktop});await sleep(250);publish({phase:'installing'});await sleep(900);publish({phase:'complete'});return state;},open:async()=>{opened=true;}};
+  ({window}=createInstallerWindow({controller,preview:true,show:false}));window.webContents.setBackgroundThrottling(false);await new Promise(resolve=>window.webContents.once('did-finish-load',resolve));
+  const wait=async expression=>{const deadline=Date.now()+10000;while(!await window.webContents.executeJavaScript(expression)){if(Date.now()>deadline)throw Error('Installer UI timed out: '+expression);await sleep(30);}};
+  const capture=async name=>{await sleep(100);const folder=path.resolve(__dirname,'../.cache/previews/installer');await fs.mkdir(folder,{recursive:true});await fs.writeFile(path.join(folder,name+'.png'),(await window.webContents.capturePage()).toPNG());};
+  await wait("!document.getElementById('install').disabled");assert.equal(await window.webContents.executeJavaScript("typeof require"),'undefined');assert.equal(await window.webContents.executeJavaScript("getComputedStyle(document.querySelector('.shell')).borderRadius"),'26px');await capture('ready');
+  await window.webContents.executeJavaScript("document.getElementById('browse').click()");await wait("document.getElementById('directory').textContent==='F:\\\\Games\\\\XeroLag'");
+  await window.webContents.executeJavaScript("document.getElementById('desktop').click();document.getElementById('install').click()");await wait("!document.getElementById('error').hidden");assert.equal(shortcut,false);
+  await window.webContents.executeJavaScript("document.getElementById('install').click()");await wait("document.getElementById('step-install').dataset.status==='active'");await capture('installing');await window.webContents.executeJavaScript('window.setup.close()');assert.equal(window.isDestroyed(),false);
+  await wait("!document.getElementById('complete').hidden");await capture('complete');assert.equal(shortcut,false);assert.equal(await window.webContents.executeJavaScript("document.documentElement.scrollWidth>innerWidth"),false);
+  await window.webContents.executeJavaScript("document.getElementById('launch').click();true");await sleep(150);assert.equal(opened,true);assert.equal(window.isDestroyed(),true);clearTimeout(watchdog);console.log('Custom installer UI passed: rounded shell, sandbox, directory choice, shortcut preference, retry, progress, busy close guard and explicit launch. No installation or Windows settings were changed.');app.exit(0);
+}catch(error){console.error(error);clearTimeout(watchdog);if(window&&!window.isDestroyed())window.destroy();app.exit(1);}});

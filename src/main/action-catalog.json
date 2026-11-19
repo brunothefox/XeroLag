@@ -1,0 +1,875 @@
+[
+  {
+    "id": "responsiveness",
+    "label": "System responsiveness",
+    "group": "gaming",
+    "type": "registry",
+    "risk": "Advanced",
+    "entries": [
+      {
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+        "name": "SystemResponsiveness",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "restart": true,
+    "description": "Writes 0. Microsoft's documented MMCSS behavior treats values below 10 as 20."
+  },
+  {
+    "id": "network-throttling",
+    "label": "Multimedia network throttling",
+    "group": "gaming",
+    "type": "registry",
+    "risk": "Advanced",
+    "entries": [
+      {
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+        "name": "NetworkThrottlingIndex",
+        "kind": "DWord",
+        "value": -1
+      }
+    ]
+  },
+  {
+    "id": "hags",
+    "label": "Hardware GPU scheduling preference",
+    "group": "gaming",
+    "type": "registry",
+    "risk": "Moderate",
+    "entries": [
+      {
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "name": "HwSchMode",
+        "kind": "DWord",
+        "value": 2
+      }
+    ],
+    "restart": true,
+    "description": "Requires a compatible GPU and driver. Windows controls hardware support.",
+    "scope": "hags",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "hags",
+        "label": "On",
+        "value": 2
+      },
+      {
+        "id": "hags-off",
+        "label": "Off",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "game-mode",
+    "label": "Windows Game Mode",
+    "group": "gaming",
+    "type": "registry",
+    "risk": "Safe",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\GameBar",
+        "name": "AutoGameModeEnabled",
+        "kind": "DWord",
+        "value": 1
+      }
+    ],
+    "scope": "game-mode",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "game-mode",
+        "label": "On",
+        "value": 1
+      },
+      {
+        "id": "game-mode-off",
+        "label": "Off",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "id": "paging-executive",
+    "label": "Keep pageable kernel code in RAM",
+    "group": "gaming",
+    "type": "registry",
+    "risk": "Advanced",
+    "entries": [
+      {
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "name": "DisablePagingExecutive",
+        "kind": "DWord",
+        "value": 1
+      }
+    ],
+    "restart": true
+  },
+  {
+    "id": "mouse-acceleration",
+    "label": "Disable mouse acceleration",
+    "group": "gaming",
+    "type": "registry",
+    "risk": "Safe",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Control Panel\\Mouse",
+        "name": "MouseSpeed",
+        "kind": "String",
+        "value": "0"
+      },
+      {
+        "hive": "HKCU",
+        "key": "Control Panel\\Mouse",
+        "name": "MouseThreshold1",
+        "kind": "String",
+        "value": "0"
+      },
+      {
+        "hive": "HKCU",
+        "key": "Control Panel\\Mouse",
+        "name": "MouseThreshold2",
+        "kind": "String",
+        "value": "0"
+      }
+    ],
+    "signOut": true
+  },
+  {
+    "id": "keyboard-repeat",
+    "label": "Fast keyboard repeat",
+    "group": "gaming",
+    "type": "registry",
+    "risk": "Safe",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Control Panel\\Keyboard",
+        "name": "KeyboardDelay",
+        "kind": "String",
+        "value": "0"
+      },
+      {
+        "hive": "HKCU",
+        "key": "Control Panel\\Keyboard",
+        "name": "KeyboardSpeed",
+        "kind": "String",
+        "value": "31"
+      }
+    ],
+    "signOut": true
+  },
+  {
+    "id": "delivery-optimization",
+    "label": "Disable update sharing with other PCs",
+    "group": "network",
+    "type": "registry",
+    "risk": "Safe",
+    "entries": [
+      {
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+        "name": "DODownloadMode",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "scope": "delivery-optimization",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "delivery-optimization",
+        "label": "Off",
+        "value": 0
+      },
+      {
+        "id": "delivery-lan",
+        "label": "LAN sharing",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "classic-menu",
+    "label": "Classic context menu",
+    "group": "shell",
+    "type": "registry",
+    "risk": "Safe",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32",
+        "name": "",
+        "kind": "String",
+        "value": ""
+      }
+    ],
+    "signOut": true
+  },
+  {
+    "id": "shortcut-suffix",
+    "label": "Remove shortcut name suffix",
+    "group": "shell",
+    "type": "registry",
+    "risk": "Safe",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        "name": "link",
+        "kind": "Binary",
+        "value": "AAAAAA=="
+      }
+    ],
+    "signOut": true
+  },
+  {
+    "id": "extensions",
+    "label": "Show file extensions",
+    "group": "shell",
+    "type": "registry",
+    "risk": "Safe",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "HideFileExt",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "signOut": true,
+    "scope": "extensions",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "extensions",
+        "label": "Show",
+        "value": 0
+      },
+      {
+        "id": "extensions-hide",
+        "label": "Hide",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "hidden-files",
+    "label": "Show hidden files",
+    "group": "shell",
+    "type": "registry",
+    "risk": "Moderate",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "Hidden",
+        "kind": "DWord",
+        "value": 1
+      }
+    ],
+    "signOut": true,
+    "scope": "hidden-files",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "hidden-files",
+        "label": "Show",
+        "value": 1
+      },
+      {
+        "id": "hidden-files-hide",
+        "label": "Hide",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "sticky-keys",
+    "label": "Disable five-Shift activation prompt",
+    "group": "shell",
+    "type": "registry",
+    "risk": "Moderate",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Control Panel\\Accessibility\\StickyKeys",
+        "name": "Flags",
+        "kind": "String",
+        "value": "498",
+        "clearBits": 12
+      }
+    ],
+    "signOut": true
+  },
+  {
+    "id": "privacy",
+    "label": "Reduce diagnostics and suggestions",
+    "group": "shell",
+    "type": "registry",
+    "risk": "Moderate",
+    "entries": [
+      {
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "name": "AllowTelemetry",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo",
+        "name": "Enabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Privacy",
+        "name": "TailoredExperiencesWithDiagnosticDataEnabled",
+        "kind": "DWord",
+        "value": 0
+      },
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\UserProfileEngagement",
+        "name": "ScoobeSystemSettingEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "description": "Applies supported policy and advertising preferences. Diagnostic limits depend on the Windows edition."
+  },
+  {
+    "id": "animations",
+    "label": "Reduce window animations",
+    "group": "shell",
+    "type": "registry",
+    "risk": "Safe",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects",
+        "name": "VisualFXSetting",
+        "kind": "DWord",
+        "value": 2
+      },
+      {
+        "hive": "HKCU",
+        "key": "Control Panel\\Desktop\\WindowMetrics",
+        "name": "MinAnimate",
+        "kind": "String",
+        "value": "0"
+      },
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "TaskbarAnimations",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "signOut": true
+  },
+  {
+    "id": "default-timer",
+    "label": "Platform clock policy",
+    "type": "special",
+    "kind": "clock",
+    "group": "gaming",
+    "risk": "Advanced",
+    "restart": true,
+    "scope": "default-timer",
+    "reapply": true,
+    "bootValue": null,
+    "choices": [
+      {
+        "id": "default-timer",
+        "label": "Windows default",
+        "value": null
+      },
+      {
+        "id": "platform-clock-forced",
+        "label": "Force platform clock",
+        "value": "Yes"
+      }
+    ]
+  },
+  {
+    "id": "dynamic-tick",
+    "label": "Dynamic tick",
+    "type": "special",
+    "kind": "tick",
+    "group": "gaming",
+    "risk": "Advanced",
+    "restart": true,
+    "scope": "dynamic-tick",
+    "reapply": true,
+    "bootValue": "Yes",
+    "choices": [
+      {
+        "id": "dynamic-tick",
+        "label": "Disabled",
+        "value": "Yes"
+      },
+      {
+        "id": "dynamic-tick-enabled",
+        "label": "Enabled",
+        "value": "No"
+      },
+      {
+        "id": "dynamic-tick-default",
+        "label": "Windows default",
+        "value": null
+      }
+    ]
+  },
+  {
+    "id": "unpark",
+    "label": "Unpark processor cores",
+    "type": "special",
+    "kind": "unpark",
+    "group": "gaming",
+    "risk": "Moderate",
+    "restart": false,
+    "description": "Applies to the current power plan on AC power and battery."
+  },
+  {
+    "id": "usb-suspend",
+    "label": "Disable USB selective suspend",
+    "type": "special",
+    "kind": "usb",
+    "group": "gaming",
+    "risk": "Moderate",
+    "restart": false,
+    "description": "Applies to the current power plan on AC power and battery."
+  },
+  {
+    "id": "ultimate-plan",
+    "label": "Ultimate Performance plan",
+    "type": "special",
+    "kind": "ultimate",
+    "group": "gaming",
+    "risk": "Moderate",
+    "restart": false
+  },
+  {
+    "id": "service-sysmain",
+    "label": "SysMain / Superfetch",
+    "group": "services",
+    "type": "service",
+    "name": "SysMain",
+    "risk": "Moderate",
+    "scope": "service-sysmain",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "service-sysmain",
+        "label": "Disabled",
+        "value": "Disabled"
+      },
+      {
+        "id": "service-sysmain-enable",
+        "label": "Automatic",
+        "value": "Auto"
+      }
+    ]
+  },
+  {
+    "id": "service-diagtrack",
+    "label": "Connected diagnostics",
+    "group": "services",
+    "type": "service",
+    "name": "DiagTrack",
+    "risk": "Moderate",
+    "scope": "service-diagtrack",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "service-diagtrack",
+        "label": "Disabled",
+        "value": "Disabled"
+      },
+      {
+        "id": "service-diagtrack-enable",
+        "label": "Manual",
+        "value": "Manual"
+      }
+    ]
+  },
+  {
+    "id": "service-dmwappushservice",
+    "label": "WAP push routing",
+    "group": "services",
+    "type": "service",
+    "name": "dmwappushservice",
+    "risk": "Moderate",
+    "scope": "service-dmwappushservice",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "service-dmwappushservice",
+        "label": "Disabled",
+        "value": "Disabled"
+      },
+      {
+        "id": "service-dmwappushservice-enable",
+        "label": "Manual",
+        "value": "Manual"
+      }
+    ]
+  },
+  {
+    "id": "service-wsearch",
+    "label": "Windows Search indexing",
+    "group": "services",
+    "type": "service",
+    "name": "WSearch",
+    "risk": "Moderate",
+    "scope": "service-wsearch",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "service-wsearch",
+        "label": "Disabled",
+        "value": "Disabled"
+      },
+      {
+        "id": "service-wsearch-enable",
+        "label": "Manual",
+        "value": "Manual"
+      }
+    ]
+  },
+  {
+    "id": "service-mapsbroker",
+    "label": "Downloaded Maps",
+    "group": "services",
+    "type": "service",
+    "name": "MapsBroker",
+    "risk": "Safe",
+    "scope": "service-mapsbroker",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "service-mapsbroker",
+        "label": "Disabled",
+        "value": "Disabled"
+      },
+      {
+        "id": "service-mapsbroker-enable",
+        "label": "Manual",
+        "value": "Manual"
+      }
+    ]
+  },
+  {
+    "id": "service-xblgamesave",
+    "label": "Xbox game-save service",
+    "group": "services",
+    "type": "service",
+    "name": "XblGameSave",
+    "risk": "Moderate",
+    "scope": "service-xblgamesave",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "service-xblgamesave",
+        "label": "Disabled",
+        "value": "Disabled"
+      },
+      {
+        "id": "service-xblgamesave-enable",
+        "label": "Manual",
+        "value": "Manual"
+      }
+    ]
+  },
+  {
+    "id": "service-xboxgipsvc",
+    "label": "Xbox accessory service",
+    "group": "services",
+    "type": "service",
+    "name": "XboxGipSvc",
+    "risk": "Advanced",
+    "scope": "service-xboxgipsvc",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "service-xboxgipsvc",
+        "label": "Disabled",
+        "value": "Disabled"
+      },
+      {
+        "id": "service-xboxgipsvc-enable",
+        "label": "Manual",
+        "value": "Manual"
+      }
+    ]
+  },
+  {
+    "id": "service-xboxnetapisvc",
+    "label": "Xbox networking",
+    "group": "services",
+    "type": "service",
+    "name": "XboxNetApiSvc",
+    "risk": "Advanced",
+    "scope": "service-xboxnetapisvc",
+    "reapply": true,
+    "choices": [
+      {
+        "id": "service-xboxnetapisvc",
+        "label": "Disabled",
+        "value": "Disabled"
+      },
+      {
+        "id": "service-xboxnetapisvc-enable",
+        "label": "Manual",
+        "value": "Manual"
+      }
+    ]
+  },
+  {
+    "id": "hags-off",
+    "label": "Hardware GPU scheduling preference",
+    "group": "gaming",
+    "type": "registry",
+    "risk": "Moderate",
+    "entries": [
+      {
+        "hive": "HKLM",
+        "key": "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        "name": "HwSchMode",
+        "kind": "DWord",
+        "value": 1
+      }
+    ],
+    "restart": true,
+    "description": "Requires a compatible GPU and driver. Windows controls hardware support.",
+    "scope": "hags",
+    "reapply": true,
+    "hidden": true
+  },
+  {
+    "id": "game-mode-off",
+    "label": "Windows Game Mode",
+    "group": "gaming",
+    "type": "registry",
+    "risk": "Safe",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\GameBar",
+        "name": "AutoGameModeEnabled",
+        "kind": "DWord",
+        "value": 0
+      }
+    ],
+    "scope": "game-mode",
+    "reapply": true,
+    "hidden": true
+  },
+  {
+    "id": "extensions-hide",
+    "label": "Show file extensions",
+    "group": "shell",
+    "type": "registry",
+    "risk": "Safe",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "HideFileExt",
+        "kind": "DWord",
+        "value": 1
+      }
+    ],
+    "signOut": true,
+    "scope": "extensions",
+    "reapply": true,
+    "hidden": true
+  },
+  {
+    "id": "hidden-files-hide",
+    "label": "Show hidden files",
+    "group": "shell",
+    "type": "registry",
+    "risk": "Moderate",
+    "entries": [
+      {
+        "hive": "HKCU",
+        "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+        "name": "Hidden",
+        "kind": "DWord",
+        "value": 2
+      }
+    ],
+    "signOut": true,
+    "scope": "hidden-files",
+    "reapply": true,
+    "hidden": true
+  },
+  {
+    "id": "delivery-lan",
+    "label": "Disable update sharing with other PCs",
+    "group": "network",
+    "type": "registry",
+    "risk": "Safe",
+    "entries": [
+      {
+        "hive": "HKLM",
+        "key": "SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+        "name": "DODownloadMode",
+        "kind": "DWord",
+        "value": 1
+      }
+    ],
+    "scope": "delivery-optimization",
+    "reapply": true,
+    "hidden": true
+  },
+  {
+    "id": "service-sysmain-enable",
+    "label": "SysMain / Superfetch",
+    "group": "services",
+    "type": "service",
+    "name": "SysMain",
+    "risk": "Moderate",
+    "scope": "service-sysmain",
+    "reapply": true,
+    "hidden": true,
+    "enable": true
+  },
+  {
+    "id": "service-diagtrack-enable",
+    "label": "Connected diagnostics",
+    "group": "services",
+    "type": "service",
+    "name": "DiagTrack",
+    "risk": "Moderate",
+    "scope": "service-diagtrack",
+    "reapply": true,
+    "hidden": true,
+    "enable": true
+  },
+  {
+    "id": "service-dmwappushservice-enable",
+    "label": "WAP push routing",
+    "group": "services",
+    "type": "service",
+    "name": "dmwappushservice",
+    "risk": "Moderate",
+    "scope": "service-dmwappushservice",
+    "reapply": true,
+    "hidden": true,
+    "enable": true
+  },
+  {
+    "id": "service-wsearch-enable",
+    "label": "Windows Search indexing",
+    "group": "services",
+    "type": "service",
+    "name": "WSearch",
+    "risk": "Moderate",
+    "scope": "service-wsearch",
+    "reapply": true,
+    "hidden": true,
+    "enable": true
+  },
+  {
+    "id": "service-mapsbroker-enable",
+    "label": "Downloaded Maps",
+    "group": "services",
+    "type": "service",
+    "name": "MapsBroker",
+    "risk": "Safe",
+    "scope": "service-mapsbroker",
+    "reapply": true,
+    "hidden": true,
+    "enable": true
+  },
+  {
+    "id": "service-xblgamesave-enable",
+    "label": "Xbox game-save service",
+    "group": "services",
+    "type": "service",
+    "name": "XblGameSave",
+    "risk": "Moderate",
+    "scope": "service-xblgamesave",
+    "reapply": true,
+    "hidden": true,
+    "enable": true
+  },
+  {
+    "id": "service-xboxgipsvc-enable",
+    "label": "Xbox accessory service",
+    "group": "services",
+    "type": "service",
+    "name": "XboxGipSvc",
+    "risk": "Advanced",
+    "scope": "service-xboxgipsvc",
+    "reapply": true,
+    "hidden": true,
+    "enable": true
+  },
+  {
+    "id": "service-xboxnetapisvc-enable",
+    "label": "Xbox networking",
+    "group": "services",
+    "type": "service",
+    "name": "XboxNetApiSvc",
+    "risk": "Advanced",
+    "scope": "service-xboxnetapisvc",
+    "reapply": true,
+    "hidden": true,
+    "enable": true
+  },
+  {
+    "id": "platform-clock-forced",
+    "label": "Platform clock policy",
+    "type": "special",
+    "kind": "clock",
+    "group": "gaming",
+    "risk": "Advanced",
+    "restart": true,
+    "scope": "default-timer",
+    "reapply": true,
+    "bootValue": "Yes",
+    "hidden": true
+  },
+  {
+    "id": "dynamic-tick-enabled",
+    "label": "Dynamic tick",
+    "type": "special",
+    "kind": "tick",
+    "group": "gaming",
+    "risk": "Advanced",
+    "restart": true,
+    "scope": "dynamic-tick",
+    "reapply": true,
+    "bootValue": "No",
+    "hidden": true
+  },
+  {
+    "id": "dynamic-tick-default",
+    "label": "Dynamic tick",
+    "type": "special",
+    "kind": "tick",
+    "group": "gaming",
+    "risk": "Advanced",
+    "restart": true,
+    "scope": "dynamic-tick",
+    "reapply": true,
+    "bootValue": null,
+    "hidden": true
+  }
+]

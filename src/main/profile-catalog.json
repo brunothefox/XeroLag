@@ -1,0 +1,105 @@
+{
+  "settings": [
+    {
+      "id": "gameMode",
+      "label": "Game Mode",
+      "key": "Software\\Microsoft\\GameBar",
+      "name": "AutoGameModeEnabled"
+    },
+    {
+      "id": "mouseSpeed",
+      "label": "Mouse acceleration",
+      "key": "Control Panel\\Mouse",
+      "name": "MouseSpeed"
+    },
+    {
+      "id": "mouseThreshold1",
+      "label": "Mouse threshold 1",
+      "key": "Control Panel\\Mouse",
+      "name": "MouseThreshold1"
+    },
+    {
+      "id": "mouseThreshold2",
+      "label": "Mouse threshold 2",
+      "key": "Control Panel\\Mouse",
+      "name": "MouseThreshold2"
+    },
+    {
+      "id": "keyboardDelay",
+      "label": "Keyboard repeat delay",
+      "key": "Control Panel\\Keyboard",
+      "name": "KeyboardDelay"
+    },
+    {
+      "id": "keyboardSpeed",
+      "label": "Keyboard repeat speed",
+      "key": "Control Panel\\Keyboard",
+      "name": "KeyboardSpeed"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "gaming",
+      "name": "Gaming Mode",
+      "icon": "gpu",
+      "powerPlans": [
+        "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"
+      ],
+      "settings": {
+        "gameMode": {
+          "kind": "DWord",
+          "value": 1
+        }
+      }
+    },
+    {
+      "id": "competitive",
+      "name": "Competitive / Low-Latency",
+      "icon": "activity",
+      "powerPlans": [
+        "e9a42b02-d5df-448d-aa00-03f14749eb61",
+        "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"
+      ],
+      "settings": {
+        "gameMode": {
+          "kind": "DWord",
+          "value": 1
+        },
+        "mouseSpeed": {
+          "kind": "String",
+          "value": "0"
+        },
+        "mouseThreshold1": {
+          "kind": "String",
+          "value": "0"
+        },
+        "mouseThreshold2": {
+          "kind": "String",
+          "value": "0"
+        },
+        "keyboardDelay": {
+          "kind": "String",
+          "value": "0"
+        },
+        "keyboardSpeed": {
+          "kind": "String",
+          "value": "31"
+        }
+      }
+    },
+    {
+      "id": "quiet",
+      "name": "Work / Quiet Mode",
+      "icon": "monitor",
+      "powerPlans": [
+        "381b4222-f694-41f0-9685-ff5bb260df2e"
+      ],
+      "settings": {
+        "gameMode": {
+          "kind": "DWord",
+          "value": 0
+        }
+      }
+    }
+  ]
+}

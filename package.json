@@ -1,0 +1,97 @@
+{
+  "name": "xerolag",
+  "version": "0.3.1",
+  "description": "Windows performance, cleanup, gaming and recovery tools in one desktop app.",
+  "main": "main.js",
+  "scripts": {
+    "start": "npm run prepare:assets && npm run build:css && electron .",
+    "dev": "npm run prepare:assets && npm run build:css && concurrently --kill-others --success first --names CSS,APP \"npm:watch:css\" \"electron .\"",
+    "prepare:assets": "node scripts/prepare-icon.js && powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/prepare-installer.ps1",
+    "clean": "powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/clean.ps1",
+    "watch:css": "tailwindcss -i ./src/renderer/styles/input.css -o ./src/renderer/styles/output.css --watch",
+    "build:css": "tailwindcss -i ./src/renderer/styles/input.css -o ./src/renderer/styles/output.css --minify",
+    "check": "node scripts/check.js && powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/check-powershell.ps1 && npm test",
+    "test": "node --test tests/foundation.test.js tests/telemetry.test.js tests/history.test.js tests/profiles.test.js tests/modules.test.js tests/installer.test.js",
+    "test:desktop": "npm run build:css && electron tests/electron-smoke.js",
+    "build": "npm run check && npm run prepare:assets && npm run build:css",
+    "pack": "npm run build && electron-builder --win --x64 --dir --publish never",
+    "dist": "npm run build && node scripts/build-installer.js",
+    "test:installer": "electron tests/installer-ui.js",
+    "site:build": "node scripts/build-site.js",
+    "test:site": "npm run site:build && electron tests/site-ui.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "private": true,
+  "build": {
+    "appId": "app.xerolag.desktop",
+    "productName": "XeroLag",
+    "asar": true,
+    "asarUnpack": [
+      "src/powershell/**/*.ps1",
+      "src/main/*.json"
+    ],
+    "npmRebuild": false,
+    "directories": {
+      "output": ".cache/package",
+      "buildResources": "assets/branding"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json",
+      "assets/branding/**/*",
+      "assets/generated/icon.ico",
+      "src/main/**/*.js",
+      "src/main/**/*.json",
+      "src/powershell/**/*.ps1",
+      "src/renderer/**/*",
+      "!src/renderer/styles/input.css"
+    ],
+    "win": {
+      "icon": "assets/generated/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "requestedExecutionLevel": "requireAdministrator",
+      "artifactName": "${productName}-Setup-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": false,
+      "include": "assets/installer/installer.nsh",
+      "installerIcon": "assets/generated/icon.ico",
+      "uninstallerIcon": "assets/generated/icon.ico",
+      "installerHeader": "assets/generated/installer-header.bmp",
+      "installerSidebar": "assets/generated/installer-sidebar.bmp",
+      "uninstallerSidebar": "assets/generated/installer-sidebar.bmp",
+      "installerLanguages": [
+        "en_US"
+      ],
+      "displayLanguageSelector": false,
+      "artifactName": "XeroLag-Engine-${version}-${arch}.${ext}"
+    }
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.5",
+    "concurrently": "10.0.7",
+    "electron": "45.4.1",
+    "electron-builder": "26.18.0",
+    "tailwindcss": "4.3.5"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
+    "electron-winstaller@5.4.0": true
+  }
+}

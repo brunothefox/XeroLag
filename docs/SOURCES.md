@@ -1,0 +1,11 @@
+# Artwork and measurements
+
+Game discovery reads installed launcher metadata. Steam's app ID selects its official library capsule, following the [Steam library asset format](https://partner.steamgames.com/doc/store/assets/libraryassets?l=english). Installed library artwork is preferred; official Steam CDN downloads are cached locally, limited to two MiB and three concurrent requests, and can be switched off in Settings. The renderer receives raster data only and cannot request arbitrary remote URLs. Artwork belongs to its respective publisher. Other launchers use installed executable icons or a user-selected raster cover; no scraping or third-party download-site integration is used.
+
+Startup boot time comes from the Windows Diagnostics-Performance Event 100 BootTime field. Application times come from Event 101 TotalTime fields, matched to the executable name. These are historical measurements, not estimates of time saved by disabling an app. Missing or inaccessible logs show Not recorded.
+
+DNS provider testing times an actual DNS lookup and records ICMP latency separately. Route diagnostics use four ICMP requests to 1.1.1.1 over the system route, with measured packet loss and successive-response jitter. Samples remain in the current app session. These readings do not measure game-server latency or internet throughput.
+
+MTU changes use [Set-NetIPInterface](https://learn.microsoft.com/en-us/powershell/module/nettcpip/set-netipinterface) and preserve the original ActiveStore and PersistentStore values independently. Adapter restart uses [Restart-NetAdapter](https://learn.microsoft.com/en-us/powershell/module/netadapter/restart-netadapter). Delivery Optimization cleanup uses the Windows cmdlet described in [Microsoft's monitoring documentation](https://learn.microsoft.com/en-us/windows/deployment/do/waas-delivery-optimization-monitor).
+
+The permissions tool runs a read-only icacls verification on a selected folder. Startup recovery, memory diagnostics and system image backup open the actual Windows tools; their wizards retain control of restarting, choosing a backup destination and running repairs. Native Windows tools do not belong to XeroLag's setting-undo journal.

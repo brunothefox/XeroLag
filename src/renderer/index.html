@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; object-src 'none'">
+<title>XeroLag</title>
+<link rel="icon" href="../../assets/branding/iconLOGO.ico">
+<link rel="stylesheet" href="styles/output.css">
+<script src="ui.js" defer></script>
+<script src="usage-history.js" defer></script>
+<script src="profile-page.js" defer></script>
+<script src="workbench-page.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<svg class="icon-library" aria-hidden="true"><defs><symbol id="i-overview" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol><symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3"/></symbol><symbol id="i-ram" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h2v4H7zm8 0h2v4h-2zM7 18v3m5-3v3m5-3v3"/></symbol><symbol id="i-gpu" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="13" rx="2"/><circle cx="12" cy="11.5" r="3.5"/><path d="M6 9v5m12-5v5M7 18v3m4-3v3m4-3v3"/></symbol><symbol id="i-disk" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 14h18m-4 3h1m-11 0h.01"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-activity" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol><symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3v9m-5-7a8 8 0 1 0 10 0"/></symbol><symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 8a8 8 0 1 0 .4 7M20 3v5h-5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 17v4h16v-4"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-4 4 4-4 4 4M4 17v4h16v-4"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5zm-9 9 9 5 9-5M3 16l9 5 9-5"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol><symbol id="i-windows" viewBox="0 0 24 24"><path d="m3 5 8-1v7H3zm10-1 8-1v8h-8zM3 13h8v7l-8-1zm10 0h8v8l-8-1z"/></symbol></defs></svg>
+<svg class="icon-library" aria-hidden="true"><defs>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></symbol>
+<symbol id="i-game" viewBox="0 0 24 24"><path d="M7 7h10c3 0 5 11 3 12-2 1-4-3-5-3H9c-1 0-3 4-5 3C2 18 4 7 7 7zM8 10v5m-2.5-2.5h5m5-1h.01m3 3h.01"/></symbol>
+<symbol id="i-network" viewBox="0 0 24 24"><path d="M2 8a16 16 0 0 1 20 0M5 12a11 11 0 0 1 14 0m-11 4a6 6 0 0 1 8 0m-4 4h.01"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9S4 17 4 12V6zM8 12l3 3 5-6"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V5h7l2 3h9v12H3z"/></symbol>
+<symbol id="i-clean" viewBox="0 0 24 24"><path d="m14 3 7 7-7 7-7-7zM7 10l-4 8 3 3 8-4m-9-3 5 5"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></symbol>
+<symbol id="i-registry" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17h7m-3.5-3.5v7"/></symbol>
+<symbol id="i-tools" viewBox="0 0 24 24"><path d="M14 5a6 6 0 0 0-7 7l-4 5a2 2 0 0 0 4 4l5-5a6 6 0 0 0 7-7l-4 4-4-4z"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-13h-8z"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M5 16V9a7 7 0 0 1 14 0v7l2 2H3zm5 5h4"/></symbol>
+</defs></svg>
+<header class="titlebar">
+<img class="header-logo" src="../../assets/branding/HeaderLOGO.png" alt="XeroLag" draggable="false">
+<div class="titlebar-right"><button id="command-open" class="title-tool" title="Go to a tool (Ctrl+K)" aria-label="Search tools"><svg aria-hidden="true"><use href="#i-search"/></svg></button><button class="title-tool" data-page="activity" title="Recent activity" aria-label="Recent activity"><svg aria-hidden="true"><use href="#i-bell"/></svg></button><span id="access" class="access-label"></span><div class="window-controls">
+<button id="minimize" class="window-button" aria-label="Minimize"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"/></svg></button>
+<button id="maximize" class="window-button" aria-label="Maximize"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx="1"/></svg></button>
+<button id="close" class="window-button close-button" aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg></button>
+</div></div>
+</header>
+<div class="app-layout">
+<aside class="sidebar">
+<nav aria-label="Main navigation">
+<button class="nav-item" data-page="dashboard" aria-current="page"><svg aria-hidden="true"><use href="#i-overview"/></svg>Overview</button>
+<span class="nav-group-label">Optimizer</span>
+<button class="nav-item" data-page="cleaner"><svg aria-hidden="true"><use href="#i-clean"/></svg>Clean</button>
+<button class="nav-item" data-page="profiles"><svg aria-hidden="true"><use href="#i-game"/></svg>Gaming</button>
+<button class="nav-item" data-page="network"><svg aria-hidden="true"><use href="#i-network"/></svg>Network</button>
+<button class="nav-item" data-page="startup"><svg aria-hidden="true"><use href="#i-windows"/></svg>Windows</button>
+<button class="nav-item" data-page="repair"><svg aria-hidden="true"><use href="#i-check"/></svg>Repair</button>
+<details class="nav-tools" open><summary>Tools</summary><button class="nav-item" data-page="startup"><svg aria-hidden="true"><use href="#i-power"/></svg>Startup manager</button><button class="nav-item" data-page="services"><svg aria-hidden="true"><use href="#i-settings"/></svg>Services</button><button class="nav-item" data-page="registry"><svg aria-hidden="true"><use href="#i-registry"/></svg>Registry</button><button class="nav-item" data-page="processes"><svg aria-hidden="true"><use href="#i-activity"/></svg>Processes</button><button class="nav-item" data-page="tools"><svg aria-hidden="true"><use href="#i-tools"/></svg>More tools</button></details>
+</nav>
+<div class="sidebar-bottom"><div class="activity-nav"><button id="activity-nav" class="nav-item" data-page="activity"><svg aria-hidden="true"><use href="#i-clock"/></svg>Activity<span id="activity-count" class="activity-count" aria-live="polite"></span></button></div><button class="nav-item" data-page="settings"><svg aria-hidden="true"><use href="#i-settings"/></svg>Settings</button><button class="nav-item" data-page="about"><svg class="icon " aria-hidden="true"><use href="#i-info"/></svg>About</button><span id="version" class="sidebar-footer">XeroLag</span></div>
+</aside>
+<main id="main-content">
+<div class="page-header"><div class="heading-group"><h1 id="page-title" tabindex="-1">Overview</h1><span id="live-state" class="live-state" title="Readings are updating">Live</span></div><div class="header-actions"><button class="plan-chip" data-page="profiles" title="Open gaming profiles"><svg class="icon " aria-hidden="true"><use href="#i-power"/></svg><span id="power-plan">—</span></button><button id="refresh" class="icon-button" aria-label="Refresh readings" title="Refresh readings"><svg class="icon " aria-hidden="true"><use href="#i-refresh"/></svg></button></div></div>
+<nav id="module-tabs" class="module-tabs" aria-label="Section navigation"></nav>
+<p id="error" class="notice notice-error" role="alert" hidden></p>
+<p id="telemetry-warning" class="notice" role="status" hidden></p>
+<div id="page-dashboard" class="page">
+<section id="recovery-setup" class="recovery-setup" aria-labelledby="recovery-setup-title" hidden>
+<svg aria-hidden="true"><use href="#i-layers"/></svg>
+<div class="recovery-setup-copy"><h2 id="recovery-setup-title">Set up recovery</h2><p id="recovery-setup-description">Save your current settings and create a Windows restore point.</p></div>
+<button id="recovery-setup-start" class="button-primary" disabled>Create snapshot</button>
+</section>
+<div id="overview-profile-summary"></div>
+<section class="resource-panel rounded-2xl" aria-label="System usage">
+<div class="metric-grid">
+<article class="metric-card"><div class="metric-top"><h2><svg class="icon " aria-hidden="true"><use href="#i-cpu"/></svg>CPU</h2><div class="metric-value" id="cpu-value">—</div></div><p id="cpu-detail" class="metric-detail">—</p><progress id="cpu-meter" max="100" value="0" aria-label="CPU utilization" hidden></progress><div id="cpu-meta" class="metric-meta"></div></article>
+<article class="metric-card"><div class="metric-top"><h2><svg class="icon " aria-hidden="true"><use href="#i-ram"/></svg>Memory</h2><div class="metric-value" id="ram-value">—</div></div><p id="ram-detail" class="metric-detail">—</p><progress id="ram-meter" max="100" value="0" aria-label="Memory utilization" hidden></progress><div id="ram-meta" class="metric-meta"></div></article>
+<article class="metric-card"><div class="metric-top"><h2><svg class="icon " aria-hidden="true"><use href="#i-gpu"/></svg>GPU</h2><div class="metric-value" id="gpu-value">—</div></div><p id="gpu-detail" class="metric-detail">—</p><progress id="gpu-meter" max="100" value="0" aria-label="GPU utilization" hidden></progress><div id="gpu-meta" class="metric-meta"></div></article>
+</div>
+<div class="secondary-stats">
+<div class="secondary-stat" title="Dedicated memory used across all reported adapters"><svg class="icon " aria-hidden="true"><use href="#i-gpu"/></svg><div><span class="stat-label">VRAM</span><div id="vram-value" class="stat-value">—</div></div></div>
+<div class="secondary-stat" title="Active time on the system drive"><svg class="icon " aria-hidden="true"><use href="#i-disk"/></svg><div><span class="stat-label">Disk activity</span><div id="disk-value" class="stat-value">—</div></div></div>
+<div class="secondary-stat" title="Running Windows processes"><svg class="icon " aria-hidden="true"><use href="#i-layers"/></svg><div><span class="stat-label">Processes</span><div id="process-value" class="stat-value">—</div></div></div>
+<div class="secondary-stat" title="Time since the last full restart"><svg class="icon " aria-hidden="true"><use href="#i-clock"/></svg><div><span class="stat-label">Uptime</span><div id="uptime-value" class="stat-value">—</div></div></div>
+</div>
+</section>
+<div class="overview-actions" aria-label="Quick actions">
+<button class="overview-action" data-page="recovery"><span><svg aria-hidden="true"><use href="#i-layers"/></svg>Backup &amp; recovery</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+<button class="overview-action" data-page="games"><span><svg aria-hidden="true"><use href="#i-gpu"/></svg>Launch a game</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+</div>
+<div class="analysis-grid">
+<section class="panel history-panel rounded-2xl" aria-labelledby="history-title">
+<div class="panel-header"><h2 id="history-title"><svg class="icon " aria-hidden="true"><use href="#i-activity"/></svg>Usage history</h2><div class="chart-tabs" role="group" aria-label="Chart metric"><button class="chart-tab" data-chart="cpu" aria-pressed="true">CPU</button><button class="chart-tab" data-chart="ram" aria-pressed="false">RAM</button><button class="chart-tab" data-chart="gpu" aria-pressed="false">GPU</button></div></div>
+<div class="chart-summary"><strong id="history-current">—</strong><span id="history-stats"></span></div>
+<div class="history-chart"><svg id="usage-chart" viewBox="0 0 600 132" role="img" aria-label="Usage over the last 60 seconds" preserveAspectRatio="none"><path class="chart-grid" d="M0 12H600M0 64H600M0 116H600"/><path id="history-area" class="chart-area"/><path id="history-line" class="chart-line"/><circle id="history-dot" class="chart-dot" r="3" hidden/></svg><span class="axis-top">100%</span><span class="axis-bottom">0%</span><p id="history-empty">Collecting samples</p></div>
+<div class="chart-footer"><span>60 seconds</span><span id="status" role="status">Reading system…</span></div>
+</section>
+<section class="panel memory-panel rounded-2xl" aria-labelledby="memory-title">
+<div class="panel-header"><h2 id="memory-title"><svg class="icon " aria-hidden="true"><use href="#i-ram"/></svg>Memory</h2><span id="memory-percent" class="panel-value">—</span></div>
+<div class="memory-numbers"><div><span class="stat-label">In use</span><strong id="memory-used">—</strong></div><div><span class="stat-label">Available</span><strong id="memory-free">—</strong></div></div>
+<progress id="memory-distribution" max="100" value="0" aria-label="Memory in use"></progress>
+<dl id="memory-summary" class="detail-list compact-details"></dl>
+</section>
+</div>
+<section class="panel storage-panel rounded-2xl" aria-labelledby="storage-heading"><div class="panel-header"><h2 id="storage-heading"><svg class="icon " aria-hidden="true"><use href="#i-disk"/></svg>Storage</h2><button class="text-button" data-page="storage" aria-label="View storage details"><svg class="icon " aria-hidden="true"><use href="#i-arrow"/></svg></button></div><div id="volumes" class="volume-list"><span class="muted">—</span></div></section>
+<section class="system-strip" aria-label="System information"><span><svg class="icon " aria-hidden="true"><use href="#i-windows"/></svg><span id="system-os">—</span></span><span><svg class="icon " aria-hidden="true"><use href="#i-cpu"/></svg><span id="system-cores">—</span></span><span><svg class="icon " aria-hidden="true"><use href="#i-monitor"/></svg><span id="system-driver">—</span></span></section>
+</div>
+<div id="page-profiles" class="page" hidden>
+<div id="profile-status-strip"><div class="profile-safety-strip"><span id="profile-safety-status">Reading backup status…</span><button class="button-secondary" data-revert-profiles disabled><svg aria-hidden="true"><use href="#i-refresh"/></svg>Revert all</button></div></div>
+<p id="profile-message" class="notice" role="status" hidden></p>
+<div id="profile-progress" class="profile-progress" role="status" hidden><svg aria-hidden="true"><use href="#i-clock"/></svg><span id="profile-progress-text"></span></div>
+<section class="panel rounded-2xl" aria-labelledby="presets-heading"><div class="panel-header"><h2 id="presets-heading"><svg aria-hidden="true"><use href="#i-power"/></svg>Presets</h2><span id="profile-active" class="profile-state">Original settings</span></div><div id="profile-list" aria-busy="true"><p class="muted">Reading Windows settings…</p></div></section>
+<details id="snapshot-fold" class="snapshot-fold"><summary>Snapshot &amp; recovery</summary><section class="panel rounded-2xl section-gap" aria-labelledby="snapshot-heading"><div class="panel-header"><h2 id="snapshot-heading"><svg aria-hidden="true"><use href="#i-layers"/></svg>Safety snapshot</h2><span id="snapshot-status" class="profile-state">Not created</span></div>
+<dl id="snapshot-summary" class="detail-list snapshot-summary"></dl>
+<div class="snapshot-actions"><button id="create-snapshot" class="button-secondary" disabled><svg aria-hidden="true"><use href="#i-layers"/></svg><span>Create snapshot</span></button><button id="revert-snapshot" class="button-secondary" data-revert-profiles disabled><svg aria-hidden="true"><use href="#i-refresh"/></svg>Revert all</button><button id="open-backups" class="button-secondary" disabled><svg aria-hidden="true"><use href="#i-arrow"/></svg>Backup files</button><button id="open-protection" class="button-tertiary">System Protection</button></div>
+<details id="snapshot-details" class="saved-settings" hidden><summary>Saved settings</summary><p id="snapshot-file" class="backup-path"></p><div id="snapshot-values" class="table-container"></div></details>
+</section></details>
+<div id="gaming-shortcuts"></div>
+<p class="profile-footnote">Input changes take effect after signing out. Revert all restores your saved settings.</p>
+</div>
+<div id="page-hardware" class="page" hidden>
+<div class="hardware-grid">
+<section class="panel rounded-2xl"><div class="panel-header"><h2><svg class="icon " aria-hidden="true"><use href="#i-monitor"/></svg>Computer</h2></div><dl id="computer-details" class="detail-list"></dl></section>
+<section class="panel rounded-2xl"><div class="panel-header"><h2><svg class="icon " aria-hidden="true"><use href="#i-cpu"/></svg>Processor</h2></div><div id="processor-details"></div></section>
+<section class="panel rounded-2xl"><div class="panel-header"><h2><svg class="icon " aria-hidden="true"><use href="#i-gpu"/></svg>Graphics</h2></div><div id="graphics-details"></div></section>
+<section class="panel rounded-2xl"><div class="panel-header"><h2><svg class="icon " aria-hidden="true"><use href="#i-ram"/></svg>Memory modules</h2></div><div id="memory-details"></div></section>
+</div>
+<section class="panel rounded-2xl section-gap"><div class="panel-header"><h2><svg class="icon " aria-hidden="true"><use href="#i-activity"/></svg>Logical processors</h2></div><div id="core-usage" class="core-grid"></div></section>
+</div>
+<div id="page-storage" class="page" hidden>
+<section class="storage-totals" aria-label="Storage totals"><div><svg class="icon " aria-hidden="true"><use href="#i-disk"/></svg><span>Total capacity</span><strong id="storage-total">—</strong></div><div><svg class="icon " aria-hidden="true"><use href="#i-layers"/></svg><span>Used</span><strong id="storage-used">—</strong></div><div><svg class="icon " aria-hidden="true"><use href="#i-check"/></svg><span>Free</span><strong id="storage-free">—</strong></div></section>
+<section class="panel rounded-2xl"><div class="panel-header"><h2><svg class="icon " aria-hidden="true"><use href="#i-disk"/></svg>Volumes</h2></div><div id="storage-volumes" class="volume-list"></div></section>
+<section class="panel rounded-2xl section-gap"><div class="panel-header"><h2><svg class="icon " aria-hidden="true"><use href="#i-disk"/></svg>Physical disks</h2></div><div id="disk-details" class="table-container"></div></section>
+<div class="disk-throughput"><span><svg class="icon " aria-hidden="true"><use href="#i-download"/></svg>Read <strong id="disk-read">—</strong></span><span><svg class="icon " aria-hidden="true"><use href="#i-upload"/></svg>Write <strong id="disk-write">—</strong></span><span id="disk-drive">—</span></div>
+</div>
+<div id="page-about" class="page" hidden><section class="panel about-panel rounded-2xl"><img class="about-logo" src="../../assets/branding/HeaderLOGO.png" alt="XeroLag"><dl id="app-details" class="detail-list"></dl></section></div>
+</main>
+</div>
+</body>
+</html>
